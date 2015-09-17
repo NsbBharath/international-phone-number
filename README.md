@@ -11,7 +11,7 @@ An [Angular](http://angularjs.org/) module for entering and validating internati
 > - [$.fn.data](https://api.jquery.com/data)
 > - (optional) [cookie](https://github.com/carhartl/jquery-cookie#usage) support
 > 
-> There is a subset of the [Zepto](http://zeptojs.com) library inside de `lib` directory that fulfills all of the above requirements and is a also lightweight
+> There is a subset of the [Zepto](http://zeptojs.com) library inside de `lib` directory that fulfills all of the above requirements and is also lightweight
 
 ## Table of Contents
 
