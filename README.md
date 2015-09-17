@@ -29,7 +29,7 @@ An [Angular](http://angularjs.org/) module for entering and validating internati
 
 
 ## Demo and Examples
-You can view a live demo and some examples of how to use the various options here: http://denim2x.github.io/intl-tel-input.html, or try it for yourself using the included demo.html.
+You can view a live demo and some examples of how to use the various options [here](http://denim2x.github.io/international-phone-number), or try it for yourself using the included `demo.html`.
 
 
 ## Features
@@ -312,7 +312,7 @@ $scope.submit = function() {
 ```
 But this way the user will see their value change when they submit the form, which is weird. A better solution would be to update the value of a separate hidden input, and then read that POST variable on the server instead. See an example of this solution [here](http://jackocnr.com/lib/intl-tel-input/examples/gen/hidden-input.html).  
 
-**Customise invalid key flash**  
+**Customize invalid key flash**  
 Set the colour like this (or set to `none` to disable):  
 ```css
 .intl-tel-input input.iti-invalid-key {background-color: #FFC7C7;}
@@ -350,6 +350,7 @@ You will need to install [Grunt](http://gruntjs.com) (`npm install grunt-cli -g`
 
 
 ## Attributions
+* Original code by [Jack O'Connor](http://jackocnr.com)
 * Flag images from [region-flags](https://github.com/behdad/region-flags)
 * Original country data from mledoze's [World countries in JSON, CSV and XML](https://github.com/mledoze/countries)
 * Formatting/validation/example number code from [libphonenumber](https://github.com/googlei18n/libphonenumber)
