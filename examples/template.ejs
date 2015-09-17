@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example: <%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+    <link rel="stylesheet" href="../css/intlTelInput.min.css?<%= time %>">
+    <link rel="stylesheet" href="../css/demo.css?<%= time %>">
+    <% if (stylesheet) { %>
+      <link rel="stylesheet" href="../css/<%= stylesheet %>?<%= time %>">
+    <% } %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/intlTelInput.min.js?<%= time %>"></script>
+    <script src="../js/<%= script %>?<%= time %>"></script>
+  </head>
+
+  <body ng-app="demo">
+    <a href="/intl-tel-input.html">Back</a>
+    <h1>Example: <%= title %></h1>
+    <p><%= desc %></p>
+    
+    <h2>Markup</h2>
+    <pre><code class="language-markup"><%= markup %></code></pre>
+
+    <h2>Code</h2>
+    <pre><code class="language-javascript"><%= code %></code></pre>
+
+    <h2>Result</h2>
+    <div ng-controller="result">
+      <%- markup %>
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-67725708-1', 'auto');ga('send', 'pageview');
+    </script>
+  </body>
+</html>

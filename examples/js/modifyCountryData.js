@@ -1,7 +1,14 @@
-var countryData = $.fn.intlTelInput.getCountryData();
-$.each(countryData, function(i, country) {
-  country.name = country.name.replace(/.+\((.+)\)/,"$1");
-});
-$("#phone").intlTelInput({
-  utilsScript: "../../lib/libphonenumber/build/utils.js" // just for formatting/placeholders etc
-});
+angular.
+  module('demo', ['intlTelInput']).
+  controller('result', ['intlTelInput', function (TelInput) {
+    TelInput.countryData.forEach(function (country) {
+      country.name = country.name.replace(/.+\((.+)\)/, "$1");
+    });
+
+    TelInput.config(function () {
+      return {
+        // just for formatting/placeholders etc
+        utilsScript: "../js/libphonenumber.min.js"
+      };
+    });
+  }]);

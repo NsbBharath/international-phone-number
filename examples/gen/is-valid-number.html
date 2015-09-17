@@ -3,28 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>Example: Validation</title>
-    <link rel="stylesheet" href="../css/prism.css">
-    <link rel="stylesheet" href="../../build/css/intlTelInput.css?1433497107037">
-    <link rel="stylesheet" href="../../build/css/demo.css?1433497107037">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+    <link rel="stylesheet" href="../css/intlTelInput.min.css?1442427060379">
+    <link rel="stylesheet" href="../css/demo.css?1442427060379">
     
-      <link rel="stylesheet" href="../css/isValidNumber.css?1433497107037">
+      <link rel="stylesheet" href="../css/isValidNumber.css?1442427060379">
     
 
-    <!-- GOOGLE ANALYTICS -->
-    <script>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-26178728-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-    <!-- /GOOGLE ANALYTICS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/intlTelInput.min.js?1442427060379"></script>
+    <script src="../js/isValidNumber.js?1442427060379"></script>
   </head>
 
-  <body>
+  <body ng-app="demo">
     <a href="/intl-tel-input.html">Back</a>
     <h1>Example: Validation</h1>
     <p>Use public isValidNumber method (utilising Google&#39;s libphonenumber) to validate the telephone number on the change event.</p>
@@ -35,45 +28,53 @@
 &lt;span id=&quot;error-msg&quot; class=&quot;hide&quot;&gt;Invalid number&lt;/span&gt;</code></pre>
 
     <h2>Code</h2>
-    <pre><code class="language-javascript">var telInput = $(&quot;#phone&quot;),
-  errorMsg = $(&quot;#error-msg&quot;),
-  validMsg = $(&quot;#valid-msg&quot;);
+    <pre><code class="language-javascript">angular.
+  module(&#39;demo&#39;, [&#39;intlTelInput&#39;]).
+  controller(&#39;result&#39;, [&#39;intlTelInput&#39;, function (TelInput) {
+    var telInput = $(&quot;#phone&quot;),
+      errorMsg = $(&quot;#error-msg&quot;),
+      validMsg = $(&quot;#valid-msg&quot;);
 
-// initialise plugin
-telInput.intlTelInput({
-  utilsScript: &quot;../../lib/libphonenumber/build/utils.js&quot;
-});
+    // initialise plugin
+    telInput.intlTelInput({
+      utilsScript: &quot;../js/libphonenumber.min.js&quot;
+    });
 
-// on blur: validate
-telInput.blur(function() {
-  if ($.trim(telInput.val())) {
-    if (telInput.intlTelInput(&quot;isValidNumber&quot;)) {
-      validMsg.removeClass(&quot;hide&quot;);
-    } else {
-      telInput.addClass(&quot;error&quot;);
-      errorMsg.removeClass(&quot;hide&quot;);
+    // on blur: validate
+    telInput.blur(function () {
+      if ($.trim(telInput.val())) {
+        if (telInput.intlTelInput(&quot;isValidNumber&quot;)) {
+          validMsg.removeClass(&quot;hide&quot;);
+        } else {
+          telInput.addClass(&quot;error&quot;);
+          errorMsg.removeClass(&quot;hide&quot;);
+          validMsg.addClass(&quot;hide&quot;);
+        }
+      }
+    });
+
+    // on keydown: reset
+    telInput.keydown(function () {
+      telInput.removeClass(&quot;error&quot;);
+      errorMsg.addClass(&quot;hide&quot;);
       validMsg.addClass(&quot;hide&quot;);
-    }
-  }
-});
-
-// on keydown: reset
-telInput.keydown(function() {
-  telInput.removeClass(&quot;error&quot;);
-  errorMsg.addClass(&quot;hide&quot;);
-  validMsg.addClass(&quot;hide&quot;);
-});</code></pre>
+    });
+  }]);
+</code></pre>
 
     <h2>Result</h2>
-    <div id="result">
+    <div ng-controller="result">
       <input id="phone" type="tel">
 <span id="valid-msg" class="hide">✓ Valid</span>
 <span id="error-msg" class="hide">Invalid number</span>
     </div>
 
-    <script src="../js/prism.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="../../build/js/intlTelInput.js?1433497107037"></script>
-    <script src="../js/isValidNumber.js?1433497107037"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-67725708-1', 'auto');ga('send', 'pageview');
+    </script>
   </body>
 </html>

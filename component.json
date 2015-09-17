@@ -1,10 +1,10 @@
 {
-  "name": "intl-tel-input",
-  "repo": "Bluefieldscom/intl-tel-input",
-  "version": "6.0.8",
+  "name": "international-phone-number",
+  "repo": "denim2x/international-phone-number",
+  "version": "0.0.1",
   "scripts": ["index.js"],
   "dependencies": {
-    "jquery": ">=1.7"
+    "angular": ">=1.2.0"
   },
   "license": "MIT"
 }

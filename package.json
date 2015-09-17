@@ -1,20 +1,31 @@
 {
-  "name": "intl-tel-input",
-  "version": "6.0.8",
-  "description": "A jQuery plugin for entering international telephone numbers",
+  "name": "international-phone-number",
+  "version": "0.0.1",
+  "description": "An Angular module for entering international telephone numbers",
   "keywords": [
-    "international",
-    "i18n",
+    "code",
     "country",
     "dial",
-    "code",
-    "telephone",
-    "mobile",
+    "flag",
+    "i18n",
     "input",
-    "flag"
+    "international",
+    "mobile",
+    "number",
+    "phone",
+    "tel",
+    "telephone"
   ],
   "license": "MIT",
-  "author": "Jack O'Connor (http://jackocnr.com)",
+  "author": "denim2x (http://denim2x.github.io)",
+  "demo": "http://denim2x.github.io/international-phone-number",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denim2x/international-phone-number.git"
+  },
+  "dependencies": {
+    "angular": ">=1.2.0"
+  },
   "devDependencies": {
     "ejs": "~1.0.0",
     "grunt": "~0.4.5",
@@ -32,13 +43,8 @@
     "grunt-shell": "^1.1.1",
     "grunt-spritesmith": "^4.1.0",
     "grunt-templater": "0.0.6",
-    "jquery": ">=1.7",
     "load-grunt-config": "~0.13.1",
     "time-grunt": "~1.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Bluefieldscom/intl-tel-input.git"
   },
   "scripts": {
     "test": "grunt travis"

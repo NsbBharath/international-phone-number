@@ -1,10 +1,17 @@
-$("#phone").intlTelInput({
-  defaultCountry: "auto",
-  geoIpLookup: function(callback) {
-    $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
-      var countryCode = (resp && resp.country) ? resp.country : "";
-      callback(countryCode);
+angular.
+  module('demo', ['intlTelInput']).
+  controller('result', ['intlTelInput', function (TelInput) {
+    TelInput.config(function () {
+      return {
+        defaultCountry: "auto",
+        geoIpLookup: function (callback) {
+          $.get("http://ipinfo.io/geo").
+            success(function (data, status) {
+              callback(data ? ("" || data.country) : "");
+            });
+        },
+        // just for formatting/placeholders etc
+        utilsScript: "../js/libphonenumber.min.js"
+      };
     });
-  },
-  utilsScript: "../../lib/libphonenumber/build/utils.js" // just for formatting/placeholders etc
-});
+  }]);

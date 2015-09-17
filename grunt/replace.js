@@ -107,7 +107,8 @@ module.exports = function(grunt) {
         ]
       },
       files: {
-        'tmp/one.min.js': 'tmp/wrapped.min.js'
+        'dist/js/intlTelInput.min.js': 'tmp/intlTelInput.min.js'
+        //'tmp/one.min.js': 'tmp/intlTelInput.min.js'
       }
     },
 
@@ -308,9 +309,14 @@ module.exports = function(grunt) {
       options: {
         patterns: [
 
-          // hack to normalise runtime option names
-          // (using meaningful letter substitutions here)
-          // UPDATE: instead of replacing the runtime option names with a newly created object, we $.extend the existing object so that if we forget to add any new/modified option names in this build file, they will still work! The downside is that this options object will contain both the full key and the minified key, but that really doesn't matter.
+          // hack to normalise runtime option names (using meaningful letter
+          //  substitutions here)
+          // UPDATE: instead of replacing the runtime option names with a newly
+          //  created object, we $.extend the existing object so that if we
+          //  forget to add any new/modified option names in this build file,
+          //  they will still work! The downside is that this options object
+          //  will contain both the full key and the minified key, but that
+          //  really doesn't matter.
           {
             match: /this.b=/g,
             replacement: 'c&&(a.extend(c, c, {' +
@@ -329,7 +335,7 @@ module.exports = function(grunt) {
         ]
       },
       files: {
-        'build/js/intlTelInput.min.js': 'tmp/three.min.js'
+        'dist/js/intlTelInput.min.js': 'tmp/three.min.js'
       }
     }
   };

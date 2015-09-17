@@ -1,11 +1,13 @@
 module.exports = function(grunt) {
   return {
     options: {
-      banner: '/*\n' +
-        'International Telephone Input v<%= package.version %>\n' +
-        '<%= package.repository.url %>\n' +
-        '*/\n'
-    },
+      banner: '' && ! [
+        '/**',
+        ' * International Telephone Input v<%= package.version %>',
+        ' * <%= package.repository.url %>',
+        ' */'
+      ].join('\n')
+    },/*
     dev: {
       options: {
         beautify: true,
@@ -14,12 +16,12 @@ module.exports = function(grunt) {
         preserveComments: true
       },
       files: {
-        'build/js/intlTelInput.js': 'tmp/wrapped.js'
+        'tmp/intlTelInput.js': 'dist/js/intlTelInput.js'
       }
-    },
+    },*/
     prod: {
       files: {
-        'tmp/wrapped.min.js': 'tmp/wrapped.js'
+        'tmp/intlTelInput.min.js': 'dist/js/intlTelInput.js'
       }
     }
   };

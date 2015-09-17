@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   return {
     retina: {
         src: 'src/img/flags/*@2x.png',
-        dest: 'build/img/flags@2x.png',
+        dest: 'dist/img/flags@2x.png',
         destCss: 'src/css/sprite@2x.scss',
         cssTemplate: function() { return ''; },
         padding: 4,
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     },
     main: {
       src: ['src/img/flags/*.png', '!<%= sprite.retina.src %>'],
-      dest: 'build/img/flags.png',
+      dest: 'dist/img/flags.png',
       cssTemplate: 'grunt/tmpl/sprite-retina-mustache.scss',
       destCss: 'src/css/sprite.scss',
       padding: 2, // this is currently just for chrome, otherwise flags seem to leak into each other

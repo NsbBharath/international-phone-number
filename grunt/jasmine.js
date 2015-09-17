@@ -2,8 +2,8 @@ module.exports = function(grunt) {
   return {
     src: [
       'src/js/data.js',
-      'build/js/intlTelInput.min.js',
-      'lib/libphonenumber/build/utils.js'
+      'dist/js/intlTelInput.min.js',
+      'lib/libphonenumber/dist/utils.js'
     ],
     options: {
       vendor: [

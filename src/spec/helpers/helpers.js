@@ -11,20 +11,21 @@ var input,
     BACKSPACE: 8,
     DELETE: 46,
     CTRL: 17
-  };
+  }, 
+  utils = {};
 
 var intlSetup = function(utilsScript) {
   // by default put us in desktop mode
   window.innerWidth = 1024;
 
   // this should only run the first time
-  if (!window.intlTelInputUtilsBackup) {
-    window.intlTelInputUtilsBackup = window.intlTelInputUtils;
+  if (!utils.libphonenumberBackup) {
+    utils.libphonenumberBackup = utils.libphonenumber;
   }
   if (utilsScript) {
-    window.intlTelInputUtils = window.intlTelInputUtilsBackup;
+    utils.libphonenumber = utils.libphonenumberBackup;
   } else {
-    window.intlTelInputUtils = null;
+    utils.libphonenumber = null;
   }
 };
 

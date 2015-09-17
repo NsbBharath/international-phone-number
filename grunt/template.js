@@ -4,25 +4,8 @@ module.exports = function(grunt) {
   var time = (new Date()).getTime();
 
   return {
-    js1: {
-      src: 'src/js/intlTelInput.js.ejs',
-      dest: 'tmp/versioned.js',
-      variables: {
-        version: '<%= package.version %>'
-      }
-    },
-    js2: {
-      src: 'src/js/wrapper.js.ejs',
-      dest: 'tmp/wrapped.js',
-      variables: function() {
-        return {
-          plugin: grunt.file.read('tmp/versioned.js'),
-          data: grunt.file.read('src/js/data.js'),
-        }
-      }
-    },
     nationalMode: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/national-mode.html',
       variables: function() {
         return {
@@ -37,7 +20,7 @@ module.exports = function(grunt) {
       }
     },
     defaultCountryIp: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/default-country-ip.html',
       variables: function() {
         return {
@@ -52,7 +35,7 @@ module.exports = function(grunt) {
       }
     },
     modifyCountryData: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/modify-country-data.html',
       variables: function() {
         return {
@@ -67,7 +50,7 @@ module.exports = function(grunt) {
       }
     },
     onlyCountries: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/only-countries-europe.html',
       variables: function() {
         return {
@@ -82,7 +65,7 @@ module.exports = function(grunt) {
       }
     },
     countrySync: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/country-sync.html',
       variables: function() {
         return {
@@ -97,7 +80,7 @@ module.exports = function(grunt) {
       }
     },
     validation: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/is-valid-number.html',
       variables: function() {
         return {
@@ -112,7 +95,7 @@ module.exports = function(grunt) {
       }
     },
     hiddenInput: {
-      src: 'examples/template.html.ejs',
+      src: 'examples/template.ejs',
       dest: 'examples/gen/hidden-input.html',
       variables: function() {
         return {

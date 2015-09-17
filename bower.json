@@ -1,14 +1,14 @@
 {
-  "name": "intl-tel-input",
+  "name": "international-phone-number",
   "main": [
-    "./build/js/intlTelInput.min.js",
-    "./lib/libphonenumber/build/utils.js",
-    "./build/img/flags.png",
-    "./build/img/flags@2x.png",
-    "./build/css/intlTelInput.css"
+    "./dist/js/intlTelInput.min.js",
+    "./lib/libphonenumber/dist/utils.js",
+    "./dist/img/flags.png",
+    "./dist/img/flags@2x.png",
+    "./dist/css/intlTelInput.css"
   ],
   "dependencies": {
-    "jquery": ">=1.7"
+    "angular": ">=1.2.0"
   },
   "devDependencies": {
     "jasmine-jquery": "~2.0.2"

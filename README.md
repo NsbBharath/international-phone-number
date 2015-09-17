@@ -1,9 +1,17 @@
-# International Telephone Input [![Build Status](https://travis-ci.org/Bluefieldscom/intl-tel-input.svg)](https://travis-ci.org/Bluefieldscom/intl-tel-input)
-A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, which lists all the countries and their international dial codes next to their flags.
+# International Telephone Input 
+An [Angular](http://angularjs.org/) module for entering and validating international telephone numbers. It adds a flag dropdown to any input, which lists all the countries and their international dial codes next to their flags.
 
-<img src="https://raw.github.com/Bluefieldscom/intl-tel-input/master/screenshot.png" width="424px" height="246px">
+<img src="https://raw.github.com/denim2x/international-phone-number/master/screenshot.png" width="424px" height="246px">
 
-If you like it, please upvote on [Product Hunt](http://www.producthunt.com/posts/intl-tel-input)!
+> #### Note:
+> This module relies on a jQuery-compatible library that provides the following components:
+> - [DOM manipulation](https://api.jquery.com/category/manipulation) (append, appendTo, attr etc.)
+> - [selector](https://api.jquery.com/jQuery/#jQuery1) support (missing from Angular's [jqLite](https://docs.angularjs.org/api/ng/function/angular.element#angular-s-jqlite))
+> - [events](https://api.jquery.com/category/events) with namespace support
+> - [$.fn.data](https://api.jquery.com/data)
+> - (optional) [cookie](https://github.com/carhartl/jquery-cookie#usage) support
+> 
+> There is a subset of the [Zepto](http://zeptojs.com) library inside de `lib` directory that fulfills all of the above requirements and is a also lightweight
 
 ## Table of Contents
 
@@ -21,7 +29,7 @@ If you like it, please upvote on [Product Hunt](http://www.producthunt.com/posts
 
 
 ## Demo and Examples
-You can view a live demo and some examples of how to use the various options here: http://jackocnr.com/intl-tel-input.html, or try it for yourself using the included demo.html.
+You can view a live demo and some examples of how to use the various options here: http://denim2x.github.io/intl-tel-input.html, or try it for yourself using the included demo.html.
 
 
 ## Features
@@ -43,11 +51,11 @@ You can view a live demo and some examples of how to use the various options her
 
 
 ## Getting Started
-1. Download the [latest version](https://github.com/Bluefieldscom/intl-tel-input/archive/master.zip), or better yet install it with [npm](https://www.npmjs.com/) or [Bower](http://bower.io)
+1. Download the [latest version](https://github.com/denim2x/international-phone-number/archive/master.zip), or better yet install it with [npm](https://www.npmjs.com/) or [Bower](http://bower.io)
 
 2. Link the stylesheet
   ```html
-  <link rel="stylesheet" href="path/to/intlTelInput.css">
+  <link rel="stylesheet" href="path/to/intlTelInput.min.css">
   ```
 
 3. Override the path to flags.png in your CSS
@@ -56,17 +64,56 @@ You can view a live demo and some examples of how to use the various options her
   ```
   _Update: you will now also need to override the path to flags@2x.png (for retina devices). The best way to do this is to copy the media query at the end of [intlTelInput.scss](https://github.com/Bluefieldscom/intl-tel-input/blob/master/src/css/intlTelInput.scss) and update the path._
 
-4. Add the plugin script and initialise it on your input element
-  ```html
-  <input type="tel" id="mobile-number">
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="path/to/intlTelInput.min.js"></script>
-  <script>
-    $("#mobile-number").intlTelInput();
-  </script>
-  ```
-
+4. Add the necessary scripts in `head` (or use a [module loader](http://requirejs.org)): 
+```html
+<script src="path/to/angular.min.js"></script>
+<script src="path/to/zepto.min.js"></script>
+<script src="path/to/intlTelInput.min.js"></script>
+```
+  
+5. There are at least three usage models for this module:
+    1. Use an attribute directive (one of `international`, `intl`, `i11l`, with an optional value as an identifier) and retrieve it via `done()`:
+    ```html
+    <script>
+      angular.
+        module('app', ['intlTelInput']).
+        controller('main', ['intlTelInput', function (TelInput) {
+          TelInput.config(function (element, name, $attrs) {
+            // 'element' is a $.fn object
+            // 'name' is the value of the attribute directive
+            // '$attrs' is the relevant subset of the '$attrs' object
+            return {/* options */};
+          }).done(function (element, name) {
+            // handle the resulting 'element' (events etc.)
+          });
+        }]);
+    </script>
+    <input type="tel" international="phone">
+    ```
+    2. Use the `intlTelInput` service to setup the element:
+    ```html
+    <script>
+      angular.
+        module('app', ['intlTelInput']).
+        controller('main', ['intlTelInput', function (TelInput) {
+          // TelInput(element: string|HTMLInputElement, [options: Object])
+          var telInput = new TelInput('phone', {/* options */});
+        }]);
+    </script>
+    <input type="tel" id="phone">
+    ```
+    3. Alternatively: `$.fn.intlTelInput()`:
+    ```html
+    <script>
+      angular.
+        module('app', ['intlTelInput']).
+        controller('main', ['intlTelInput', function (TelInput) {
+          // intlTelInput(element: string|HTMLInputElement, [options: Object])
+          var telInput = $("#phone").intlTelInput({/* options */});
+        }]);
+    </script>
+    <input type="tel" id="phone">
+    ```
 5. **Recommended:** initialise the plugin with the `utilsScript` option to enable formatting/validation, and to allow you to extract full international numbers using `getNumber`.
 
 
@@ -243,7 +290,7 @@ Returns an array of country objects:
 
 
 ## Utilities Script
-A custom build of Google's [libphonenumber](http://libphonenumber.googlecode.com) which enables the following features:
+A custom build of Google's [libphonenumber](https://github.com/googlei18n/libphonenumber/tree/master/javascript/i18n/phonenumbers) which enables the following features:
 
 * As-you-type formatting with `autoFormat` option, which prevents you from entering invalid characters
 * Validation with `isValidNumber`, `getNumberType` and `getValidationError` methods
@@ -252,16 +299,16 @@ A custom build of Google's [libphonenumber](http://libphonenumber.googlecode.com
 
 International number formatting/validation is hard (it varies by country/district, and we currently support ~230 countries). The only comprehensive solution I have found is libphonenumber, which I have precompiled into a single JavaScript file and included in the lib directory. Unfortunately even after minification it is still ~215KB, but if you use the `utilsScript` option then it will only fetch the script when the page has finished loading (to prevent blocking).
 
-To recompile [Utilities Script](#utilities-script) see js-docs in top of [utils.js](lib/libphonenumber/src/utils.js).
+To recompile [Utilities Script](#utilities-script) run `grunt libphonenumber`.
 
 
 ## Troubleshooting
 **Submitting the full international number when in nationalMode**  
 If you're submitting the form using Ajax, simply use `getNumber` to get the number before sending it. If you're using the standard form POST method, you have two options. The easiest thing to do is simply update the input value using `getNumber` in a submit handler:  
 ```js
-$("form").submit(function() {
+$scope.submit = function() {
   myInput.val(myInput.intlTelInput("getNumber"));
-});
+};
 ```
 But this way the user will see their value change when they submit the form, which is weird. A better solution would be to update the value of a separate hidden input, and then read that POST variable on the server instead. See an example of this solution [here](http://jackocnr.com/lib/intl-tel-input/examples/gen/hidden-input.html).  
 
@@ -299,13 +346,12 @@ _Note: there is currently [a bug](https://bugs.webkit.org/show_bug.cgi?id=141822
 ## Contributing
 I'm very open to contributions, big and small! For instructions on contributing to a project on Github, see this guide: [Fork A Repo](https://help.github.com/articles/fork-a-repo).
 
-You will need to install [Grunt](http://gruntjs.com) to build the project, which relies on [npm](https://www.npmjs.org). You will also need [evenizer](https://github.com/katapad/evenizer) (`npm install -g evenizer`) and [imagemagick](http://www.imagemagick.org/) to generate retina flag sprites. Currently we pull in the flag icons in a submodule (until [this issue](https://github.com/behdad/region-flags/issues/3) is resolved), so you need to cd into region-flags/ and run `git submodule init` and then `git submodule update`. Then back in the project directory, run `npm install` to install Grunt etc, then `grunt bower` to install other dependencies, then you should be good to run `grunt build` to build the project. At this point, the included demo.html should be working. You should make your changes in the `src` directory and be sure to run `grunt build` again before committing.
+You will need to install [Grunt](http://gruntjs.com) (`npm install grunt-cli -g`) to build the project, which relies on [npm](https://www.npmjs.org). You will also need [evenizer](https://github.com/katapad/evenizer) (`npm install -g evenizer`) and [imagemagick](http://www.imagemagick.org/) to generate retina flag sprites. Currently we pull in the flag icons in a submodule (until [this issue](https://github.com/behdad/region-flags/issues/3) is resolved), so you need to cd into region-flags/ and run `git submodule init` and then `git submodule update`. Then back in the project directory, run `npm install` to install Grunt etc, then `grunt bower` to install other dependencies, then you should be good to run `grunt build` to build the project. At this point, the included demo.html should be working. You should make your changes in the `src` directory and be sure to run `grunt build` again before committing.
 
 
 ## Attributions
 * Flag images from [region-flags](https://github.com/behdad/region-flags)
 * Original country data from mledoze's [World countries in JSON, CSV and XML](https://github.com/mledoze/countries)
-* Formatting/validation/example number code from [libphonenumber](http://libphonenumber.googlecode.com)
+* Formatting/validation/example number code from [libphonenumber](https://github.com/googlei18n/libphonenumber)
 * Lookup user's country using [ipinfo.io](http://ipinfo.io)
-* Feature contributions are listed in the wiki: [Contributions](https://github.com/Bluefieldscom/intl-tel-input/wiki/Contributions)
-* List of [sites using intl-tel-input](https://github.com/Bluefieldscom/intl-tel-input/wiki/Sites-using-intl-tel-input)
+* Feature contributions are listed in the wiki: [Contributions](https://github.com/denim2x/international-phone-number/wiki/Contributions)
